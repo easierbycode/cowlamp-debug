@@ -1,0 +1,10 @@
+{
+  "description": "Debug site for Cowlamp",
+  "scripts": {
+    "start": "./node_modules/node-dev/bin/node-dev server.js"
+  },
+  "dependencies": {
+    "coffee-script": "~1.10.0",
+    "node-dev": "~3.1.1"
+  }
+}

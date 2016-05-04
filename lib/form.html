@@ -1,0 +1,47 @@
+<html ng-app='decode'>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+      a          { cursor:pointer }
+      p > b      { margin-right:15px }
+      p > a, pre { font-family: Consolas, Monaco, 'Andale Mono', monospace }
+      pre        { background:#fafcfe; color:black; font-size:16px; margin:.5em 0; padding:1em; text-shadow:0 1px white }
+    </style>
+    
+    <script>
+      angular.module('decode', []).controller('FormCtrl', function ($scope, $http) {
+        
+        $scope.selectedExample = {};
+
+        $scope.examples = {
+          '2': '83054542104696010101020657572914795729147911D8242CCA46E2A5000000000000001600310902103FFFB20F0A0000FF014300000000000800000000000000',
+          '5': '8305454210469601010105065c57291bd657291bd611d82456ca46e2b90000000000000008008f0a02103fffb00f0a00000064002030303030303030303030303033396c003030310063c81ad300000000003f0208'
+        }
+    
+        $scope.$watch('selectedExample.payload', function() {
+          if(! $scope.selectedExample.payload)  return;
+    
+          $http.get('/decode?payload='+$scope.selectedExample.payload)
+            .success(function(decoded) {
+              $scope.decoded = decoded;
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class='container' ng-controller='FormCtrl'>
+      <textarea ng-model='selectedExample.payload' class='form-control' placeholder='Enter a message (hex) or click on an example below'></textarea>
+    
+      <pre ng-show="decoded != undefined">{{ decoded | json }}</pre>
+      
+      <legend>Examples (click to decode)</legend>
+    
+      <p ng-repeat='(msgType, msgPayload) in examples'>
+        <b>{{ msgType }}</b>
+        <a ng-click="selectedExample.payload=msgPayload">{{ msgPayload }}</a>
+      </p>
+    </div>
+  </body>
+</html>
