@@ -14,49 +14,9 @@
 
         $scope.selectedExample = {};
 
-        $scope.examples = {
-          '2': '83054542104696010101020657572914795729147911D8242CCA46E2A5000000000000001600310902103FFFB20F0A0000FF014300000000000800000000000000',
-          '5': '8305454210469601010105065c57291bd657291bd611d82456ca46e2b90000000000000008008f0a02103fffb00f0a00000064002030303030303030303030303033396c003030310063c81ad300000000003f0208',
-
-          // The LMU will send a Mini Event report with the Event Code value set to the Action Modifier. The message will be sent in Store and Forward Mode
-          'mini-report-0': '830545421046960101010a066557292f7911d823a0ca46e4320037000a0f000043000000000800000000000000',
-
-          // Sends a Motion Log Report. If 'n'=0, send Short Log. Otherwise send 'n' records of Long Log
-          'send-motion-log-report-0': '8305454210469601010105066c572954765729547611d82555ca46e070000000000000000d00930902103fffac0f090000007a033c02010118002200fa2ac5ad9f11d824dbca46e12600106829006154feffff0001fffe8d3e11d824ddca46e121000d6829006155f8ffff0001fffe8e5d11d824deca46e11d000b6829006156f2ffff0000fffe8f2f11d824deca46e118000b6829006157ecffff0000fffe902611d824ddca46e12400026829006158e6ffff0001fffe912811d824dbca46e12600026829006159e000000000fffe924911d824deca46e1170000682900615ada00000000fffe931611d824e5ca46e1080008682900615bd4ffff0001fffe940e11d824e8ca46e1030005682900615cceffff0001fffe950711d824eaca46e0fe0002682900615dc8ffff0001fffe962c11d824eaca46e1030002682900615ec2ffff0001fffe96fc11d824e7ca46e1010008682900615fbcfffe0000fffe97f411d824ecca46e0ff00106829006160b6ffff0000fffe98f611d824f1ca46e0fa000b6829006161b000000000fffe9a1311d824f2ca46e0f500086829006162aaffff0001fffe9ae211d824f7ca46e0ef000b6829006163a4ffff0000fffe9bdc11d824fcca46e0de001068290061649efffe0000fffe9cdb11d824fcca46e0d6000d682900616598fffe0000ffff9dfe11d824feca46e0d4000d682900616692ffff0001ffff9ecd11d824feca46e0dc000868290061678cffff0001ffff9fc211d824feca46e0e80008682900616886fffe0000fffea0c211d824fbca46e0eb0008682900616980fffe0000ffffa1e311d824feca46e0ed0005682900616a7afffe0000ffffa2b311d82500ca46e0ea0005682900616b74fffe0000ffffa3ae11d82503ca46e0e80008682900616c6effff0001ffffa4ae11d8250aca46e0e3000b682900616d68ffff0001fffea5d011d82510ca46e0d40008682900616e62ffff0000fffea69d11d82517ca46e0c20008682900616f5cffff0000fffea79611d8251fca46e0aa000b682900617056ffff0001fffea89211d82521ca46e0a2000b682900617150ffff0001fffda9b411d82523ca46e0a5000b68290061724affff0000fffdaa8311d82524ca46e0a00008682900617344ffff0001fffdab7e11d82528ca46e09d000b68290061743effff0001fffdac7f11d8252bca46e0a2000b682900617538ffff0001fffcad9f',
-
-          // This action will cause the LMU to send an Unacknowledged Null Message to the Inbound Address
-          'send-null-message-0': '83054542104696010100000000',
-
-          // Sends Event Reports based on the Event Report Table defined in Paramater 779.
-          // Bits 0 and 1: Comm Route Selection; 0=currently selected Comm Route, 1= CommRoute 0, 2=Comm Route 1, 3=Both Comm Route 0 and Comm Route 1.
-          // Bits 2 and 3: Disposition; 0=Send (store & fwd), 1=Log (store only), 2= Send Unacknowledged, 3=(reserved).
-          // Bits 4 thru 6: Reporting Profile for Accumulator formatting; 0=currently selected or Profile 0 if none selected, 1=Reporting Profile 0, 2=Reporting Profile 1, 3=Reporting Profile 2, 4=Reporting Profile 3.
-          // Bit 7: Format Selection; 0=standard (Type 2), 1=Mini format (Type 10).
-          'send-report-via-table-0': '8305454210469601010102066d572955035729550311d82305ca46e528000000000000000500930902103fffb10f0a0000ff004300000000000800000000000000',
-
-          // Send ID Report because boot is a cold boot
-          'send-special-1': '83054542104696010101050671572955a2572955a211d823a7ca46e2e1000000000000000000930802103fffb00f0c00000064002030303030303030303030303033396c00303031004603bb2e00000000003f0208',
-
-          // Send ID Report for periodic update
-          'send-special-2': '83054542104696010101050672572955d5572955d511d82393ca46e244000000000000000200930902103fffb00f0a00000064002030303030303030303030303033396c00303031004603bb2e00000000013f0208',
-
-          // Send Unacknowledged Mini Report
-          'send-unacknowledged-mini-report-0': '8305454210469601010002067557295eb657295eb611d82375ca46e363000000000000000200a70902103fffb10f0d0000ff004300000000000800000000000000',
-
-          // The LMU will create an Accumulator report and attempt to send it to the Inbound address. If the report cannot be sent, it will be Logged in store and forward mode.
-          // NOTE: This Action only applies to the LMX interface.
-          'send-accumulator-report-0': '83054542104696010101020676572961645729616411d82486ca46e366000000000000000000980702103fffb00f100000ff004300000000000800000000000000',
-
-          // Send All DTCs (OBD)
-          'vehicle-bus-action-8': '8305454210469601010105000557296bfb57296bfb11d8219dca46e34a000000000000000500140900103fffb10f090000008400020000',
-
-          // Send Unsent DTCs (OBD)
-          'vehicle-bus-action-9': '8305454210469601010105000757296c9b57296c9b11d824cfca46e3e3000000000000000500140a02103fffb10f090000008400020100',
-
-          // Send Vehicle ID Report
-          'vehicle-bus-action-6': '8305454210469601010105000657296c5257296c5211d82367ca46e471000000000000000000140900103fffb10f0900000083005556494e3a0050524f544f3a3300504152414d533a302c312c322c372c382c31312c31332c31342c31392c323000494e44435452533a302830303030303030303030303131292c312830313130303130313131312900',
-
-        }
+        $http.get('https://script.google.com/macros/s/AKfycbx4CDENbFuDaPacJkpcsLk_fCl8M-1GOMPcvBCAFOzfsUHkrUk/exec?spreadsheetKey=13RTyZYzkQKjUNLYdSzvY-9avU-uNl_NuqAVCunwXJ2o&spreadsheetName=Examples').then(function(resp) {
+          $scope.examples = resp.data;
+        });
 
         $scope.$watch('selectedExample.payload', function() {
           if(! $scope.selectedExample.payload)  return;
@@ -75,7 +35,7 @@
 
       <pre ng-show="decoded != undefined">{{ decoded | json }}</pre>
 
-      <legend>Examples (click to decode)</legend>
+      <legend><a href='https://docs.google.com/spreadsheets/d/13RTyZYzkQKjUNLYdSzvY-9avU-uNl_NuqAVCunwXJ2o/edit' target='_'>Examples</a> (click to decode)</legend>
 
       <p ng-repeat='(msgType, msgPayload) in examples'>
         <b>{{ msgType }}</b>
