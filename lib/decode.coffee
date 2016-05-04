@@ -6,6 +6,7 @@ util = require 'util'
 parse =
   '2':  require('./msg-type-2')
   '5':  require('./msg-type-5')
+  '10': require('./msg-type-10')
 
 
 module.exports = (msg, rinfo) ->
